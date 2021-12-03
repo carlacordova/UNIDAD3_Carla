@@ -1,0 +1,88 @@
+using System;
+
+namespace JuegoAhorcado
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            int intentos = 0, Ganar = 0;
+            string palabra = ElegirPalabra();
+            char[] palabraChar = palabra.ToCharArray();
+            char[] longitud = GenerarEspacios(palabra);
+            string letraingresa = string.Empty;
+            char letraingresachar = ' ';
+            
+            bool gano = false;
+
+            while (gano == false)
+            {
+                int SoloUna = 0, contador = 0, repite = 0;
+
+                while (SoloUna == 0)
+                {
+                    ImprimirHorca(intentos);
+                    ImprimirEspacios(longitud);
+
+                    Console.WriteLine("\nHas Fallado: {0}", intentos);
+                    Console.Write("\nIntroduce una letra: ");
+                    letraingresa = Console.ReadLine();
+                    if (CompruebaUna(letraingresa))
+                    {
+                        letraingresachar = Convert.ToChar(letraingresa);
+                        SoloUna++;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.Write("Oye, Ingresa solo una letra.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+                for (int k = 0; k < longitud.Length; k++)
+                {
+                    if (longitud[k] == letraingresachar)
+                    {
+                        if (repite == 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(" Letra ya encontrada, escribe otra.");
+                            Console.ReadKey();
+                            repite++;
+                        }
+                        contador++;
+                    }
+                    else
+                    {
+                        if (letraingresachar == palabraChar[k])
+                        {
+                            longitud[k] = letraingresachar;
+                            contador++;
+                            Ganar++;
+                        }
+                    }
+                }
+                if (contador == 0)
+                {
+                    intentos++;
+                }
+                if (intentos == 5)
+                {
+                    Console.Clear();
+                    ImprimirHorca(intentos);
+                    Console.WriteLine("\nYa no hay intentos\nPerdiste...");
+                    Console.ReadKey();
+                    break;
+                }
+                if (Ganar == palabraChar.Length)
+                    gano = true;
+                }
+                Console.Clear();
+                
+            }
+            ImprimirFinJuego(palabra, intentos, gano);
+        }
+        
+            
