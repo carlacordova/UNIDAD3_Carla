@@ -1,0 +1,33 @@
+public class MetodoDeLaBurbuja 
+{
+    public static int[] burbuja(int[] num)
+    {
+      int auxiliar;
+      int[] Ordenado;
+      for(int i = 2; i <num.length; i++)
+      {
+        for(int j = 0;j < num.length-i;j++)
+        {
+          if(num[j] > num[j+1])
+          {
+            auxiliar = num[j];
+            num[j] = num[j+1];
+            num[j+1] = auxiliar;
+          }   
+        }
+      }
+      Ordenado = num;
+      return Ordenado;
+    }
+    
+    public static void main(String[] args) 
+    {
+      
+      int num[] = {8,6,7,2,1,8,6,8,7,1,9,7,7,10};
+      int Ordenado[] = burbuja(num);
+ 
+     
+      for(int i = 0; i < Ordenado.length;i++)
+        System.out.println(Ordenado[i]);
+    }
+}
